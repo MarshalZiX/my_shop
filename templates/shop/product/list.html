@@ -1,0 +1,45 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+{% block title %}
+  {% if category %} {{ category.name }} {% else %} Страница товаров {% endif %}
+{% endblock %}
+{% block content %}
+  <div id="sidebar" class="col-sm-3" style="width: 200px;">
+    <form method="post" class='border_g form_p form-inline'>
+      {% csrf_token %}
+        <p style="margin-left:13px;"> Цена, руб.</p>
+        <div class="form-group">
+
+          <input type="text" name="from" class="form-control" id="exampleInputEmail1" placeholder="Цена от" value="{{from}}" style='width: 80px; margin-left: 12px;'>
+         - 
+        </div>
+        <div class="form-group">
+          <input type="text" name="to" class="form-control" id="exampleInputPassword1" placeholder="Цена до" value="{{to}}" style="width: 80px">
+        </div>
+       <button type="submit" class="btn btn-default" style= 'margin-top:20px; margin-left:13px;'>Применить</button>
+    </form>
+    <div class='border_g news'>
+    <p> Новости </p> <hr>
+    <a href="http://127.0.0.1:8000/5/yotaphone-2/">
+    <img src="{% static  'img/news_1.png' %}" >
+    <p>Новый Yotaphone 2 </p>
+    </a>
+    </div>
+  </div>
+  <div id="main" class="product_list col-sm-9">
+    <h1>{% if category %}{{ category.name }}{% else %}Товары{% endif %}</h1>
+    <div class="items row">
+      {% for product in products %}
+        <div class="item col-sm-4 itemmm border_g">
+          <a href="{{ product.get_absolute_url }}">
+            <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no-image.jpg"%}{% endif %}" class="img-responsive" >
+          </a>
+          <div class="spacer"></div>
+          <a href="{{ product.get_absolute_url }}" style = "text-decoration: none;" class='name'>{{ product.name }}</a>
+          <p>{{ product.price }} руб.</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}</code>
+</pre>

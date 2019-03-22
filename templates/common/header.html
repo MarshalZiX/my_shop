@@ -1,0 +1,44 @@
+{% load static %}
+<nav id='nav' class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/"><img src="{% static "img/logo.png" %}" class="logo" ></a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li ><a href="#">Главная<span class="sr-only">(current)</span></a></li>
+        <li ><a href="company.html">О нас<span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Контакты</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Категории<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+              <li {% if not category %} class="selected" {% endif %}>
+                <a href='{% url "shop:ProductList" %}'>Все</a>
+              </li>
+            {% for cat in categories %}
+              <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+              <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+      <li><p class="navbar-text" >{% with total_items=cart|length %}
+        Ваша корзина:
+        {% if cart|length > 0 %}
+            {% comment %} <img src='{%static "img/cart.png" %}' class='cart_icon'>: {% endcomment %}
+            <a class ="navbar-link" href="{% url "cart:CartDetail" %}">
+                {{ total_items }} тов. {{ cart.get_total_price }} руб.
+            </a>
+         {% else %}
+              Пустая
+        {% endif %}
+        {% endwith %}</p></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>

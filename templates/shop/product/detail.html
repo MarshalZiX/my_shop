@@ -1,0 +1,32 @@
+{% extends "shop/base.html" %}
+{% load static %}
+{% block title %}
+  {{ product.name }}
+{% endblock %}
+{% block content %}
+  <div class="product-detail border_g row" >
+    <div class="col-sm-4">
+      <img src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no-image.jpg"%}{% endif %}" class='img-responsive' >
+    </div>  
+    <div class="col-sm-8" >
+      <h1>{{ product.name }}</h1>
+      <h2><a href="{{ product.category.get_absolute_url }}">{{ product.category.name }}</a></h2>
+      <p class="price">{{ product.price }} руб.</p>
+      <p> {% if product.avaible %} Нет в наличии 
+            {% else %} Есть в магазине
+          {% endif %} </p>
+      <h2 class="price"> На складе: {{ product.stock }}</h2>
+      <form action="{% url "cart:CartAdd" product.id %}" method="post">
+      {{ cart_product_form }}
+      {% csrf_token %}
+      <input type="submit" class="btn btn-default" value="Добавить в корзину">
+      </form>
+    </div>
+  </div>
+  <div class = "col-md-9 jumbotron description border_g" >
+    <p class="pheader">Описание</p>
+    <hr>
+     {{ product.description | linebreaks}}
+  </div>
+  
+{% endblock %}
