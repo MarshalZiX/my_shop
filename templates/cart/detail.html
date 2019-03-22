@@ -46,7 +46,14 @@
     </tbody>
   </table>
   <p class="text-right">
-    <a href="{% url "shop:ProductList"%}" class="btn">Продолжить покупки</a>
-    <a href="{% url "orders:OrderCreate" %}" class="btn">Оформить заказ</a>
+    <a href="{% url "shop:ProductList"%}">
+      <button class="btn btn-default" type="submit">Продолжить покупки
+      </button>
+    </a>
+    <a href="{% url "orders:OrderCreate" %}">
+      <button class="btn btn-default" type="submit">Оформить заказ
+      </button>
+    </a>
+
   </p>
 {% endblock %}

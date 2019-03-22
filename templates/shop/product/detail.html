@@ -16,10 +16,10 @@
             {% else %} Есть в магазине
           {% endif %} </p>
       <h2 class="price"> На складе: {{ product.stock }}</h2>
-      <form action="{% url "cart:CartAdd" product.id %}" method="post">
+      <form action="{% url "cart:CartAdd" product.id %}" method="post"> 
       {{ cart_product_form }}
       {% csrf_token %}
-      <input type="submit" class="btn btn-default" value="Добавить в корзину">
+      <input type="submit" class="btn btn-default" value="Добавить в корзину" style="margin-left:20px;">
       </form>
     </div>
   </div>

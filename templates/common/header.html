@@ -27,17 +27,19 @@
         </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-      <li><p class="navbar-text" >{% with total_items=cart|length %}
-        Ваша корзина:
+      <li><a href="{% url "cart:CartDetail" %}">
+      <button class="btn btn-default" type="submit" style= 'margin:-10px;'> 
+        Корзина:
+        {% with total_items=cart|length %}
+        
         {% if cart|length > 0 %}
             {% comment %} <img src='{%static "img/cart.png" %}' class='cart_icon'>: {% endcomment %}
-            <a class ="navbar-link" href="{% url "cart:CartDetail" %}">
-                {{ total_items }} тов. {{ cart.get_total_price }} руб.
-            </a>
+                {{ total_items }}
          {% else %}
-              Пустая
+              0
         {% endif %}
-        {% endwith %}</p></li>
+        {% endwith %}
+        </button></a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
