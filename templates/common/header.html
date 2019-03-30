@@ -1,8 +1,7 @@
 {% load static %}
 <link rel="stylesheet" href="style.css" > 
 <link rel="stylesheet" href="">
-<script src="js/jquery-1.10.2.min.js">
-<nav class="menu_1">
+<nav class="navbar-fixed-top nav">
   <ul class="main">
     <li><a href="/">Главная</a></li>
     <li><a href="#">О нас</a></li>
@@ -22,7 +21,7 @@
     </li>
     <li> <a href="#">Контакты</a></li>
     <li><a href="{% url "cart:CartDetail" %}">Корзина
-      <p>
+      <span class="badge">
         {% with total_items=cart|length %}
         {% if cart|length > 0 %}
                 {{ total_items }}
@@ -30,9 +29,8 @@
               0
         {% endif %}
         {% endwith %} 
-      </p>
+      </span>
     </a></li>
-    <div id="marker"></div>
   </ul>
 </nav>
 {% comment %}  
