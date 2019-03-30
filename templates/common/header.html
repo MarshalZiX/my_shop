@@ -1,4 +1,41 @@
 {% load static %}
+<link rel="stylesheet" href="style.css" > 
+<link rel="stylesheet" href="">
+<script src="js/jquery-1.10.2.min.js">
+<nav class="menu_1">
+  <ul class="main">
+    <li><a href="/">Главная</a></li>
+    <li><a href="#">О нас</a></li>
+    <li><img src="{% static "img/logo_1.png" %}" class="logo">
+      <ul class="drop">
+        <div>
+          <li {% if not category %} class="selected" {% endif %}>
+              <a href='{% url "shop:ProductList" %}'>Все</a>
+          </li>
+          {% for cat in categories %}
+          <li {% if category.slug == cat.slug %} class="selected" {% endif %}>
+            <a href="{{ cat.get_absolute_url }}">{{ cat.name }}</a>
+          </li>
+          {% endfor %}
+        </div>
+      </ul>
+    </li>
+    <li> <a href="#">Контакты</a></li>
+    <li><a href="{% url "cart:CartDetail" %}">Корзина
+      <p>
+        {% with total_items=cart|length %}
+        {% if cart|length > 0 %}
+                {{ total_items }}
+         {% else %}
+              0
+        {% endif %}
+        {% endwith %} 
+      </p>
+    </a></li>
+    <div id="marker"></div>
+  </ul>
+</nav>
+{% comment %}  
 <nav id='nav' class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -33,7 +70,7 @@
         {% with total_items=cart|length %}
         
         {% if cart|length > 0 %}
-            {% comment %} <img src='{%static "img/cart.png" %}' class='cart_icon'>: {% endcomment %}
+            {% comment %} <img src='{%static "img/cart.png" %}' class='cart_icon'>:
                 {{ total_items }}
          {% else %}
               0
@@ -43,4 +80,4 @@
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
-</nav>
+</nav>{% endcomment %}
