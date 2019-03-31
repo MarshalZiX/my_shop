@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'cart',
     'common',
     'orders',
+    'paypal.standard.ipn',
+    'payment',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +132,8 @@ CART_SESSION_ID = 'cart'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+#   Paypal
+PAYPAL_RECEIVER_EMAIL= 'majidkov@mail.ru'
+PAYPAL_TEST = True
+
